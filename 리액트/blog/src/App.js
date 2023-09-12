@@ -13,11 +13,12 @@ function App() {
   let [modal, setModal] = useState(false); // 보통 변경함수에는 set변수명으로 씀
 
   let [index, setIndex] = useState(0);
+  let [입력값, 입력값변경] = useState('');
 
-  [1,2,3].map(function(a){
+  [4,2,3].map(function(a){
     // console.log(1);
     // console.log(a);
-    return '123123'
+    // return '123123'
   })
 
   // let[제목1, c] = useState('강남 우동 맛집');
@@ -107,7 +108,7 @@ function App() {
           // modal == false? setModal(true) : setModal(false);
 
           // 선생님 코드
-          // setModal(!modal);
+          setModal(!modal);
 
         }}>{제목[2]}</h4>
         <p>9월 11일 발행</p>
@@ -129,18 +130,53 @@ function App() {
 
           return(
             <div className='list'>
-              <h4 onClick={()=>{ setModal(!modal); setIndex(i);}}>{제목[i]}<span onClick={ () => {
+              <h4 onClick={()=>{ setModal(!modal); setIndex(i);}}>{제목[i]}<span onClick={ (e) => {
+                e.stopPropagation(); // 상위 html로 퍼지는 이벤트 버블링을 막는 코드
                 let copy = [...따봉]; // array 자료형을 바꿀때에는 카피본 만들고
                 copy[i] = copy[i] + 1; // 값 수정하고
                 따봉변경(copy); // 바꾼다, 공식처럼...
 
-               } }>👍</span> {따봉[i]}</h4>
+               } }>👍</span> {따봉[i]}</h4> 
               <p>9월 11일 발행</p>
+              <button onClick={() => {
+                let copy = [...제목];
+                copy.splice(i, 1);
+                제목변경(copy);
+
+                // 따봉추가...
+                let copy1 = [...따봉];
+                copy1.unshift(0);
+                따봉변경(copy1);
+              }}>삭제</button>
             </div>
           )
           
         })
       }
+      {/* 나는 따봉을 눌렀지만 상위 h4에 이벤트 핸들러가 있어서 모달이 열림 -> 막아주는 코드 필요 */}
+      {/* 이벤트 버블링 */}
+
+
+      {/* <input onInput={() => { console.log(1); }}></input> */}
+      {/* <input onMouseOver={() => { console.log(1); }}></input> */}
+      <input onChange={(e) => { 
+        // console.log(e.target.value); 
+        입력값변경(e.target.value);
+        // console.log(입력값);
+        // 한글자 입력시 console창에 입력된 값이 출력안됨 -> 입력값변경 함수를 실행하는 코드보다 console코드가 먼저 실행돼서
+        }}></input>
+        <button onClick={() => {
+          let copy = [...제목];
+          copy.unshift(입력값);
+          
+          제목변경(copy);
+
+        }}>글 추가</button>
+      {/* 이벤트 객체 정보를 e로 파라미터에 넘김 */}
+      {/* e.target = 이벤트 객체 */}
+      {/* 이벤트객체의 값을 담기 위해 state 선언하자! */}
+
+      
 
 
       {/* 컴포넌트 불러오기 */}
