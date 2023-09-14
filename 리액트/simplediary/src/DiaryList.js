@@ -1,6 +1,6 @@
 import DiaryItem from "./DiaryItem";
 
-const DiaryList = ({ onDelete, diaryList }) => { // props 등록하는 방법2
+const DiaryList = ({ onRemove, diaryList, onEdit }) => { // props 등록하는 방법2
     return(
         <div className="DiaryList">
             <h2>일기 리스트</h2>
@@ -11,7 +11,7 @@ const DiaryList = ({ onDelete, diaryList }) => { // props 등록하는 방법2
                     //     return()
                     // })
                     diaryList.map((it, idx)=>(
-                        <DiaryItem key={it.id} {...it} onDelete={onDelete}/> // props 전달하는 방법2        
+                        <DiaryItem key={it.id} {...it} onRemove={onRemove} onEdit={onEdit}/> // props 전달하는 방법2        
                         // <div key={it.id}>
                         //     <div>작성자 : {it.author}</div>
                         //     <div>일기 : {it.content}</div>

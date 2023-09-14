@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import './App.css';
 import DiaryEditor from './DiaryEditor';
 import DiaryList from './DiaryList';
+import Lifecycle from './LifeCycle';
 
 const dummyList = [
 
@@ -47,16 +48,24 @@ function App() {
     setData([newItem, ...data]) // 원본배열의 앞에 추가
   }
 
-  const onDelete = (targetId) => {
+  const onRemove = (targetId) => {
     console.log(`${targetId}가 삭제됐습니다.`) // ` .. ` = +연산자 없이 변수와 문자를 같이 출력하는법 변수는 ${}로 구분
     const newDiaryList = data.filter((it)=> it.id !== targetId); // !== 타입까지도 같지 않을때
     setData(newDiaryList);
   }
 
+  const onEdit = (targetId, newContent) => {
+    setData(
+      // data.map((it) =>{ it.id == targetId ? 이땐수정 : 원본데이터 지키면됨 })
+      data.map((it) =>( it.id == targetId ? {...it, content:newContent} : it ))
+    )
+  }
+
   return (
     <div className="App">
+      <Lifecycle/>
       <DiaryEditor onCreate={onCreate}/>
-      <DiaryList diaryList={data} onDelete={onDelete}/>
+      <DiaryList diaryList={data} onRemove={onRemove} onEdit={onEdit}/>
     </div>
   );
 }
