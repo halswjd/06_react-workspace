@@ -1,0 +1,15 @@
+.link-area{
+  text-align: center;
+  margin: 20px;
+  font-size: 25px;
+}
+
+.link{
+  margin-right: 100px;
+}
+
+/* AddMovie */
+.AddMovie input{
+  height: 20px;
+  margin-bottom: 5px;
+}

@@ -8,8 +8,8 @@ const Main = ({dataList}) => {
             <Container fluid="md">
             <Row>
                 <Col>
+                <div align="center" className="king">👑</div>
                 <div className="main-titleImg" align="center">
-                    
                     <img src={dataList[0].img} width="200" height="200"></img>
                     <div className="nuri-content">
                         이름 : 매 {dataList[0].name} <br/>
@@ -20,6 +20,15 @@ const Main = ({dataList}) => {
                     {/* </div> */}
                 </div>
                 </Col>
+            </Row>
+            </Container>
+            <Container>
+            <Row>
+                {
+                    dataList.map
+        
+                }
+                
             </Row>
             </Container>
         </>
